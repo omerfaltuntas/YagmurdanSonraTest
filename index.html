@@ -61,7 +61,14 @@
       }
       updateBannerVisibility();
     }
-
+    var x = new XMLHttpRequest();
+    x.open('GET', 'https://cors-anywhere.herokuapp.com/https://example.com');
+    // I put "XMLHttpRequest" here, but you can use anything you want.
+    x.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    x.onload = function() {
+        alert(x.responseText);
+    };
+    x.send();
     // Unity konfigürasyonu
     var loaderUrl = "https://firebasestorage.googleapis.com/v0/b/ketebeapp-3302e.appspot.com/o/WebGL%2FYagmurdanSonra%2FBuild%2FYagmurdanSonra.loader.js?alt=media&token=f0be0b10-fff0-4f01-be44-d3666022cf64";
     var dataUrl = "https://firebasestorage.googleapis.com/v0/b/ketebeapp-3302e.appspot.com/o/WebGL%2FYagmurdanSonra%2FBuild%2FYagmurdanSonra.data?alt=media&token=29ea21fd-eec9-434a-a05b-b6e3577d19a2";
