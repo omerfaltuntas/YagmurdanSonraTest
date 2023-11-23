@@ -40,7 +40,10 @@
     // Firebase'i başlat
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
-
+    const cors = require('cors');
+    
+    app.use(cors());
+    
     // Unity banner gösterme fonksiyonu
     function unityShowBanner(msg, type) {
       const warningBanner = document.querySelector("#unity-warning");
