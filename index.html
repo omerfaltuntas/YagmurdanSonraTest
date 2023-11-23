@@ -23,6 +23,7 @@
   <script type="module">
     // ESM yükleyiciyi konfigüre et
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-analytics.js";
     import { getFirestore, doc, getDoc, getDocs, collection } from "https://www.gstatic.com/firebasejs/9.4.0/firebase-firestore.js";
 
     // Firebase konfigürasyonu
@@ -40,10 +41,7 @@
     // Firebase'i başlat
     const app = initializeApp(firebaseConfig);
     const analytics = getAnalytics(app);
-    const cors = require('cors');
-    
-    app.use(cors());
-    
+
     // Unity banner gösterme fonksiyonu
     function unityShowBanner(msg, type) {
       const warningBanner = document.querySelector("#unity-warning");
@@ -89,8 +87,11 @@
     const loadingBar = document.querySelector("#unity-loading-bar");
     loadingBar.style.display = "block";
 
+    // Proxy URL'i tanımlayın
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+
     var script = document.createElement("script");
-    script.src = loaderUrl;
+    script.src = proxyUrl + loaderUrl; // Proxy üzerinden yükleme yapın
     script.onload = () => {
       createUnityInstance(canvas, config, (progress) => {
         const progressBarFull = document.querySelector("#unity-progress-bar-full");
